@@ -1,0 +1,9 @@
+body{
+    background-image:url('../images/blue.jpg'); 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+nav{
+    background: rgba(0, 0, 255, 0.215);backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}

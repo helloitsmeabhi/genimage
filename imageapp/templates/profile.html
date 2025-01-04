@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="card p-4 shadow-sm" style="width: 35rem;background: rgba(83, 83, 248, 0.215);backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+            <h1>Profile</h1>
+            <p>Welcome to your profile page, {{ user.username }}!</p>   
+            <h3>Details</h3>
+            <h5>Name: {{user.username}}</h5>
+            <h5>Email: {{user.email}}</h5>
+            <!-- Buttons Container -->
+            <div class="d-flex justify-content-between">
+                <!-- Logout Button -->
+                <a href="{% url 'logout' %}" class="btn btn-primary" style="width: 5rem;">Logout</a>
+
+                <!-- Delete Account Button -->
+                <form action="{% url 'delete_account' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" style="width: 5rem;">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

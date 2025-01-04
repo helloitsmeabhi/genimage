@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Index{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'images/genimage.jpg' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top" style="border-radius: 20px;">
+            Gen-Image
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+              {% if user.is_authenticated %}
+              
+                <a class="nav-link ms-auto" style="align-content: end;" href="{% url 'logout' %}">Logout</a>
+                
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    {% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Welcome to Gen-Image</h1>
+            <p>Create stunning AI-generated images with just a prompt. Powered by Pollination AI, Bootstrap, Django, and Docker.</p>
+            <a href="#cta" class="btn btn-light btn-lg">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Features of Gen-Image</h2>
+            <div class="row">
+                <div class="col-md-4 feature-item">
+                    <i class="bi bi-image-fill"></i>
+                    <h4>AI-Generated Images</h4>
+                    <p>Simply provide a prompt and let Gen-Image generate stunning visuals using Pollination AI.</p>
+                    <br>
+                    <div class="feature-logo">
+                      <!-- Add your logo here -->
+                      <img src="{% static 'images/pollination.png' %}" alt="pollination" class="img-fluid" style="max-width: 140px;">
+                  </div>
+                </div>
+                <div class="col-md-4 feature-item">
+                    <i class="bi bi-cloud-upload-fill"></i>
+                    <h4>Cloud-Powered</h4>
+                    <p>Seamlessly integrate with Docker for smooth deployment and scalability, ensuring your app is always ready.</p>
+                    <br>
+                    <br>
+                    <div class="feature-logo">
+                      <!-- Add your logo here -->
+                      <img src="{% static 'images/docker.png' %}" alt="docker" class="img-fluid" style="max-width: 400px;">
+                  </div>
+                </div>
+                <div class="col-md-4 feature-item">
+                    <i class="bi bi-bootstrap"></i>
+                    <h4>Responsive Design</h4>
+                    <p>Our app uses Bootstrap to ensure it looks great on all devices, from desktops to mobile phones.</p>
+                    <br>
+                    <div class="feature-logo">
+                      <!-- Add your logo here -->
+                      <img src="{% static 'images/bootstrap.png' %}" alt="bootstrap" class="img-fluid" style="max-width: 150px;">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2>Ready to Generate Your Image?</h2>
+            <p>Join thousands of creative minds using Gen-Image to generate unique images for their projects and ideas.</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'home' %}" class="btn btn-light btn-lg">Get Started</a>
+            {% else %}
+            <a href="{% url 'signup' %}" class="btn btn-light btn-lg">Sign Up Now</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Bootstrap JS (for interactivity like the "Get Started" button hover) -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% endblock %}    
+    
+</body>
+</html>

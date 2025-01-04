@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Header -->
+    <h1 class="text-center">Welcome to Gen-Image, {{ user.username }}!</h1>
+</div>
+
+<div class="container mt-5" style="padding-bottom: 50px;">
+    <div class="row">
+        <!-- Input Form -->
+        <div class="col-md-12 mb-5">
+            <form id="promptForm">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" id="promptInput" class="form-control" placeholder="Enter your prompt" required>
+                    <button type="submit" class="btn btn-primary">Generate Image</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <!-- Image Display Card -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm" 
+                 style="width: 100%; height: auto; background: rgba(83, 83, 248, 0.215); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);" 
+                 id="imageCard">
+                <!-- Image or Placeholder -->
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 30rem;">
+                    <p class="text-center text-muted">Your generated image will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('promptForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const prompt = document.getElementById('promptInput').value;
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        const response = await fetch("{% url 'generate_image' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken,
+            },
+            body: new URLSearchParams({ 'prompt': prompt })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.image_url) {
+                // Update the card with the generated image
+                const imageCard = document.getElementById('imageCard');
+                imageCard.innerHTML = `<img src="${data.image_url}" alt="Generated Image" class="img-fluid" style="max-width: 100%; max-height: 100%;" />`;
+            } else {
+                alert('Failed to generate image.');
+            }
+        } else {
+            alert('Error occurred while generating the image.');
+        }
+    });
+</script>
+
+{% endblock %}
