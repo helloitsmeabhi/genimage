@@ -39,11 +39,12 @@ Make sure you have the following installed on your system:
    git clone https://github.com/your-username/gen-image.git
    cd gen-image
 2. **Download Docker Desktop**:
-    [Docker Desktop Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+    [Docker Desktop Windows](https://docs.docker.com/desktop/setup/install/windows-install/),
+    [Docker Desktop Linux](https://docs.docker.com/desktop/setup/install/linux/)
     - enable wsl on windows
     ```bash
     wsl --update
-    [Docker Desktop Linux](https://docs.docker.com/desktop/setup/install/linux/)
+    
 3. **Navigate to the project folder**:
     ```bash
     docker build -t genimage .
