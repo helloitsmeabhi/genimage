@@ -2,6 +2,7 @@
 
 Gen-Image is a modern AI-powered image generation application that leverages **Pollination AI**, **Django**, **Bootstrap**, and **Docker** to deliver seamless image creation based on user prompts. Its intuitive design ensures a smooth user experience, making it a perfect choice for creative professionals and hobbyists.
 
+![](genimage.png)
 ---
 
 ## 🌟 Features
